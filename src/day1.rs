@@ -9,25 +9,19 @@ pub fn part2(input: &String) -> usize {
 }
 
 fn part1_impl(depths: &Vec<usize>) -> usize {
-    depths
-        .into_iter()
-        .skip(1)
-        .zip(depths.into_iter())
-        .fold(0, |acc, zip| if zip.0 > zip.1 { acc + 1 } else { acc })
+    lagged_compare(depths, 1)
 }
 
 fn part2_impl(depths: &Vec<usize>) -> usize {
-    let mut windows = depths.windows(3);
-    let mut prev = window_sum(windows.next().unwrap());
-    let mut sum = 0;
-    for window in windows {
-        let next = window_sum(window);
-        if next > prev {
-            sum += 1;
-        }
-        prev = next;
-    }
-    return sum;
+    lagged_compare(depths, 3)
+}
+
+fn lagged_compare(depths: &Vec<usize>, lag: usize) -> usize {
+    depths
+        .into_iter()
+        .skip(lag)
+        .zip(depths.into_iter())
+        .fold(0, |acc, zip| if zip.0 > zip.1 { acc + 1 } else { acc })
 }
 
 fn read_input(input: &String) -> Vec<usize> {
@@ -36,14 +30,6 @@ fn read_input(input: &String) -> Vec<usize> {
         parsed_input.push(line.parse::<usize>().unwrap());
     }
     return parsed_input;
-}
-
-fn window_sum(window: &[usize]) -> usize{
-    let mut sum = 0;
-    for elem in window {
-        sum += elem;
-    }
-    return sum;
 }
 
 #[cfg(test)]
