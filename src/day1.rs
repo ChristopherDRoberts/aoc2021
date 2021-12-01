@@ -25,11 +25,7 @@ fn lagged_compare(depths: &Vec<usize>, lag: usize) -> usize {
 }
 
 fn read_input(input: &String) -> Vec<usize> {
-    let mut parsed_input = Vec::new();
-    for line in input.lines() {
-        parsed_input.push(line.parse::<usize>().unwrap());
-    }
-    return parsed_input;
+    input.lines().map(|l| l.parse::<usize>().unwrap()).collect()
 }
 
 #[cfg(test)]
