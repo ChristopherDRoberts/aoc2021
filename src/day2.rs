@@ -74,7 +74,7 @@ impl Position {
 }
 
 #[cfg(test)]
-mod test_day2 {
+mod tests_day2 {
     use super::*;
 
     #[test]

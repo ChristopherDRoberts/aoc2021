@@ -1,19 +1,11 @@
 pub fn part1(input: &str) -> usize {
-    let parsed_input = read_input(input);
-    part1_impl(&parsed_input)
+    let depths = read_input(input);
+    lagged_compare(&depths, 1)
 }
 
 pub fn part2(input: &str) -> usize {
-    let parsed_input = read_input(input);
-    part2_impl(&parsed_input)
-}
-
-fn part1_impl(depths: &Vec<usize>) -> usize {
-    lagged_compare(depths, 1)
-}
-
-fn part2_impl(depths: &Vec<usize>) -> usize {
-    lagged_compare(depths, 3)
+    let depths = read_input(input);
+    lagged_compare(&depths, 3)
 }
 
 fn lagged_compare(depths: &Vec<usize>, lag: usize) -> usize {
@@ -29,20 +21,20 @@ fn read_input(input: &str) -> Vec<usize> {
 }
 
 #[cfg(test)]
-mod day1_tests {
+mod tests_day1 {
     use super::*;
 
     #[test]
     fn test_part1() {
-        let depths = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
-        let increases = part1_impl(&depths);
+        let depths = "199\n200\n208\n210\n200\n207\n240\n269\n260\n263";
+        let increases = part1(&depths);
         assert_eq!(increases, 7);
     }
 
     #[test]
     fn test_part2() {
-        let depths = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
-        let increases = part2_impl(&depths);
+        let depths = "199\n200\n208\n210\n200\n207\n240\n269\n260\n263";
+        let increases = part2(&depths);
         assert_eq!(increases, 5);
     }
 }
