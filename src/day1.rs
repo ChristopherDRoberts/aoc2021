@@ -1,9 +1,9 @@
-pub fn part1(input: &String) -> usize {
+pub fn part1(input: &str) -> usize {
     let parsed_input = read_input(input);
     part1_impl(&parsed_input)
 }
 
-pub fn part2(input: &String) -> usize {
+pub fn part2(input: &str) -> usize {
     let parsed_input = read_input(input);
     part2_impl(&parsed_input)
 }
@@ -24,7 +24,7 @@ fn lagged_compare(depths: &Vec<usize>, lag: usize) -> usize {
         .fold(0, |acc, zip| if zip.0 > zip.1 { acc + 1 } else { acc })
 }
 
-fn read_input(input: &String) -> Vec<usize> {
+fn read_input(input: &str) -> Vec<usize> {
     input.lines().map(|l| l.parse::<usize>().unwrap()).collect()
 }
 
