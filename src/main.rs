@@ -1,10 +1,10 @@
-use std::fs;
 use aoc2021::*;
+use std::fs;
 
-fn main(){
-    let contents = fs::read_to_string("inputs/day4.txt").unwrap();
-    let part1 = day4::part1(&contents);
-    let part2 = day4::part2(&contents);
+fn main() {
+    let contents = fs::read_to_string("inputs/day5.txt").unwrap();
+    let part1 = day5::part1(&contents);
+    let part2 = day5::part2(&contents);
     println!("Part 1: {0}\nPart 2: {1}", part1, part2);
 }
 
@@ -18,8 +18,8 @@ mod test_solutions {
         let part1 = day1::part1(&contents);
         let part2 = day1::part2(&contents);
 
-        assert_eq!(part1,1195);
-        assert_eq!(part2,1235);
+        assert_eq!(part1, 1195);
+        assert_eq!(part2, 1235);
     }
 
     #[test]
@@ -28,8 +28,8 @@ mod test_solutions {
         let part1 = day2::part1(&contents);
         let part2 = day2::part2(&contents);
 
-        assert_eq!(part1,1882980);
-        assert_eq!(part2,1971232560);
+        assert_eq!(part1, 1882980);
+        assert_eq!(part2, 1971232560);
     }
 
     #[test]
@@ -38,8 +38,8 @@ mod test_solutions {
         let part1 = day3::part1(&contents);
         let part2 = day3::part2(&contents);
 
-        assert_eq!(part1,2250414);
-        assert_eq!(part2,6085575);
+        assert_eq!(part1, 2250414);
+        assert_eq!(part2, 6085575);
     }
 
     #[test]
@@ -48,7 +48,17 @@ mod test_solutions {
         let part1 = day4::part1(&contents);
         let part2 = day4::part2(&contents);
 
-        assert_eq!(part1,8136);
-        assert_eq!(part2,12738);
+        assert_eq!(part1, 8136);
+        assert_eq!(part2, 12738);
+    }
+
+    #[test]
+    fn test_day5() {
+        let contents = fs::read_to_string("inputs/day5.txt").unwrap();
+        let part1 = day5::part1(&contents);
+        let part2 = day5::part2(&contents);
+
+        assert_eq!(part1, 6710);
+        assert_eq!(part2, 12738);
     }
 }
