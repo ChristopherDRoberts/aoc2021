@@ -59,6 +59,6 @@ mod test_solutions {
         let part2 = day5::part2(&contents);
 
         assert_eq!(part1, 6710);
-        assert_eq!(part2, 12738);
+        assert_eq!(part2, 20121);
     }
 }

@@ -6,7 +6,9 @@ pub fn part1(input: &str) -> usize {
     let mut overlaps = vec![vec![0; n]; n];
     for i in 0..n {
         for j in 0..n {
-            if overlaps[i][j] >= 2 {continue}
+            if overlaps[i][j] >= 2 {
+                continue;
+            }
             for segment in &segments {
                 if !(segment.is_horizontal() || segment.is_vertical()) {
                     continue;
@@ -29,7 +31,32 @@ pub fn part1(input: &str) -> usize {
 }
 
 pub fn part2(input: &str) -> usize {
-    0
+    let segments = read_input(input);
+    let n = 1000;
+    let mut count = 0;
+    let grid = get_grid(n);
+    let mut overlaps = vec![vec![0; n]; n];
+    for i in 0..n {
+        for j in 0..n {
+            if overlaps[i][j] >= 2 {
+                continue;
+            }
+            for segment in &segments {
+                if segment.contains(grid[i][j]) {
+                    overlaps[i][j] += 1
+                }
+            }
+        }
+    }
+
+    for i in 0..n {
+        for j in 0..n {
+            if overlaps[i][j] >= 2 {
+                count += 1
+            }
+        }
+    }
+    return count;
 }
 
 fn get_grid(dim: usize) -> Vec<Vec<Point>> {
@@ -82,6 +109,7 @@ struct Segment {
     max_x: isize,
     min_y: isize,
     max_y: isize,
+    slope: isize,
 }
 
 impl Segment {
@@ -90,13 +118,29 @@ impl Segment {
         let max_x = isize::max(p1.x, p2.x);
         let min_y = isize::min(p1.y, p2.y);
         let max_y = isize::max(p1.y, p2.y);
+        let start: Point;
+        let end: Point;
+        if p1.x < p2.x {
+            start = p1;
+            end = p2;
+        } else {
+            start = p2;
+            end = p1;
+        };
+        let slope: isize;
+        if start.x != end.x {
+            slope = (end.y - start.y) / (end.x - start.x);
+        } else {
+            slope = 0;
+        }
         Segment {
-            start: p1,
-            end: p2,
+            start,
+            end,
             min_x,
             max_x,
             min_y,
             max_y,
+            slope,
         }
     }
 
@@ -119,6 +163,12 @@ impl Segment {
             return other.y == self.start.y;
         } else if self.is_vertical() {
             return other.x == self.start.x;
+        } else {
+            for x in self.start.x..=self.end.x {
+                if (other.x == x) && (other.y == (x-self.start.x) * self.slope + self.start.y) {
+                    return true;
+                }
+            }
         }
         false
     }
@@ -147,8 +197,18 @@ mod tests_day5 {
 
     #[test]
     fn test_part2() {
-        let input = "";
+        let input = "0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2
+";
         let result = part2(input);
-        assert_eq!(result, 1924);
+        assert_eq!(result, 12);
     }
 }
