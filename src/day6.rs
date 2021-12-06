@@ -9,7 +9,7 @@ pub fn part2(input: &str) -> usize {
 fn get_population(input: &str, days: usize) -> usize {
     let mut state = read_input(input);
     for _i in 0..days {
-        state = advance(state);
+        advance(&mut state);
     }
     return state.into_iter().sum();
 }
@@ -23,15 +23,14 @@ fn read_input(input: &str) -> Vec<usize> {
     return counts;
 }
 
-fn advance(state: Vec<usize>) -> Vec<usize> {
-    let mut new_state = vec![0; state.len()];
+fn advance(state: &mut Vec<usize>) {
     let new_fish = state[0];
+    let n = state.len();
     for i in 0..state.len() - 1 {
-        new_state[i] = state[i + 1];
+        state[i] = state[i + 1];
     }
-    new_state[state.len() - 1] += new_fish;
-    new_state[6] += new_fish;
-    return new_state;
+    state[n - 1] = new_fish;
+    state[6] += new_fish;
 }
 
 #[cfg(test)]
