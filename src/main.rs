@@ -2,9 +2,9 @@ use aoc2021::*;
 use std::fs;
 
 fn main() {
-    let contents = fs::read_to_string("inputs/day8.txt").unwrap();
-    let part1 = day8::part1(&contents);
-    let part2 = day8::part2(&contents);
+    let contents = fs::read_to_string("inputs/day9.txt").unwrap();
+    let part1 = day9::part1(&contents);
+    let part2 = day9::part2(&contents);
     println!("Part 1: {0}\nPart 2: {1}", part1, part2);
 }
 
