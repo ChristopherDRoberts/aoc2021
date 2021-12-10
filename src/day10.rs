@@ -23,57 +23,39 @@ pub fn part2(input: &str) -> usize {
     for line in &mut incomplete_lines {
         completions.push(complete_line(line))
     }
-    let x = 1;
     return score_completions(completions);
 }
 
 fn parse_line(chars: Vec<char>) -> ParseResult {
     let mut stack = Vec::new();
-    let mut seen_chars = Vec::new();
-    for c in chars {
+    for c in &chars {
         match c {
-            '(' => {
-                stack.push(c);
-                seen_chars.push(c)
-            }
-            '[' => {
-                stack.push(c);
-                seen_chars.push(c)
-            }
-            '{' => {
-                stack.push(c);
-                seen_chars.push(c)
-            }
-            '<' => {
-                stack.push(c);
-                seen_chars.push(c)
-            }
+            '(' => stack.push(*c),
+            '[' => stack.push(*c),
+            '{' => stack.push(*c),
+            '<' => stack.push(*c),
             ')' => {
-                seen_chars.push(c);
                 let x = stack.pop().unwrap();
                 if x != '(' {
-                    return ParseResult::Corrupted(c);
+                    return ParseResult::Corrupted(*c);
                 }
             }
             ']' => {
-                seen_chars.push(c);
                 let x = stack.pop().unwrap();
                 if x != '[' {
-                    return ParseResult::Corrupted(c);
+                    return ParseResult::Corrupted(*c);
                 }
             }
             '}' => {
-                seen_chars.push(c);
                 let x = stack.pop().unwrap();
                 if x != '{' {
-                    return ParseResult::Corrupted(c);
+                    return ParseResult::Corrupted(*c);
                 }
             }
             '>' => {
-                seen_chars.push(c);
                 let x = stack.pop().unwrap();
                 if x != '<' {
-                    return ParseResult::Corrupted(c);
+                    return ParseResult::Corrupted(*c);
                 }
             }
             _ => (),
@@ -82,7 +64,7 @@ fn parse_line(chars: Vec<char>) -> ParseResult {
     if stack.len() == 0 {
         return ParseResult::Complete;
     } else {
-        return ParseResult::Incomplete(seen_chars);
+        return ParseResult::Incomplete(chars);
     }
 }
 
@@ -116,7 +98,7 @@ fn complete_line(chars: &mut Vec<char>) -> Vec<char> {
                     completion.push('>')
                 }
             }
-            _ => ()
+            _ => (),
         }
     }
     return completion;
@@ -142,19 +124,19 @@ fn score_completions(completions: Vec<Vec<char>>) -> usize {
     let mut scores = Vec::new();
     for completion in completions {
         let mut score = 0;
-        for c in completion{
+        for c in completion {
             match c {
-                ')' => {score = score*5+1}
-                ']' => {score = score*5+2}
-                '}' => {score = score*5+3}
-                '>' => {score = score*5+4}
-                _ => ()
+                ')' => score = score * 5 + 1,
+                ']' => score = score * 5 + 2,
+                '}' => score = score * 5 + 3,
+                '>' => score = score * 5 + 4,
+                _ => (),
             }
         }
         scores.push(score);
     }
     scores.sort();
-    return scores[scores.len()/2]
+    return scores[scores.len() / 2];
 }
 
 fn read_input(input: &str) -> Vec<Vec<char>> {
