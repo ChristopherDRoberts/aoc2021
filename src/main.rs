@@ -92,4 +92,14 @@ mod test_solutions {
         assert_eq!(part1, 272);
         assert_eq!(part2, 1007675);
     }
+
+    #[test]
+    fn test_day9() {
+        let contents = fs::read_to_string("inputs/day9.txt").unwrap();
+        let part1 = day9::part1(&contents);
+        let part2 = day9::part2(&contents);
+
+        assert_eq!(part1, 537);
+        assert_eq!(part2, 1142757);
+    }
 }
