@@ -142,15 +142,6 @@ impl HeightMap {
 mod tests_day9 {
     use super::*;
 
-    // #[test]
-    // fn test_read_input() {
-    //     let input = "012
-    //     345
-    //     678";
-    //     let graph = read_input(input);
-    //     let x = 1;
-    // }
-
     #[test]
     fn test_part1() {
         let input = "2199943210
