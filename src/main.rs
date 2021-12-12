@@ -2,9 +2,9 @@ use aoc2021::*;
 use std::fs;
 
 fn main() {
-    let contents = fs::read_to_string("inputs/day11.txt").unwrap();
-    let part1 = day11::part1(&contents);
-    let part2 = day11::part2(&contents);
+    let contents = fs::read_to_string("inputs/day12.txt").unwrap();
+    let part1 = day12::part1(&contents);
+    let part2 = day12::part2(&contents);
     println!("Part 1: {0}\nPart 2: {1}", part1, part2);
 }
 
@@ -121,5 +121,15 @@ mod test_solutions {
 
         assert_eq!(part1, 1642);
         assert_eq!(part2, 320);
+    }
+
+    #[test]
+    fn test_day12() {
+        let contents = fs::read_to_string("inputs/day12.txt").unwrap();
+        let part1 = day12::part1(&contents);
+        let part2 = day12::part2(&contents);
+
+        assert_eq!(part1, 4792);
+        assert_eq!(part2, 133360);
     }
 }
