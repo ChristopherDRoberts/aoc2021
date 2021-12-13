@@ -200,6 +200,6 @@ mod tests_day12 {
         pj-fs
         start-RW";
         let result = part2(input);
-        assert_eq!(result, 103);
+        assert_eq!(result, 3509);
     }
 }
