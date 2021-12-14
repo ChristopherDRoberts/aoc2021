@@ -175,6 +175,6 @@ fold along x=5";
 fold along y=7
 fold along x=5";
         let result = part2(input);
-        assert_eq!(result, 103);
+        assert_eq!(result, 52225);
     }
 }
