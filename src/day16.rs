@@ -1,11 +1,13 @@
 pub fn part1(input: &str) -> usize {
     let bits = read_input(input);
-    let (packet,_) = parse_packet(&bits);
+    let (packet, _) = parse_packet(&bits);
     sum_version(packet)
 }
 
 pub fn part2(input: &str) -> usize {
-    0
+    let bits = read_input(input);
+    let (packet, _) = parse_packet(&bits);
+    eval_packet(&packet)
 }
 
 fn read_input(input: &str) -> Vec<usize> {
@@ -50,6 +52,52 @@ fn sum_version(packet: Packet) -> usize {
         }
     }
     return sum;
+}
+
+fn eval_packet(packet: &Packet) -> usize {
+    match packet {
+        Packet::Literal { value, .. } => *value,
+        Packet::Operator {
+            id: 0, subpackets, ..
+        } => subpackets.iter().map(|p| eval_packet(p)).sum(),
+        Packet::Operator {
+            id: 1, subpackets, ..
+        } => subpackets.iter().map(|p| eval_packet(p)).product(),
+        Packet::Operator {
+            id: 2, subpackets, ..
+        } => subpackets.iter().map(|p| eval_packet(p)).min().unwrap(),
+        Packet::Operator {
+            id: 3, subpackets, ..
+        } => subpackets.iter().map(|p| eval_packet(p)).max().unwrap(),
+        Packet::Operator {
+            id: 5, subpackets, ..
+        } => {
+            if eval_packet(&subpackets[0]) > eval_packet(&subpackets[1]) {
+                1
+            } else {
+                0
+            }
+        }
+        Packet::Operator {
+            id: 6, subpackets, ..
+        } => {
+            if eval_packet(&subpackets[0]) < eval_packet(&subpackets[1]) {
+                1
+            } else {
+                0
+            }
+        }
+        Packet::Operator {
+            id: 7, subpackets, ..
+        } => {
+            if eval_packet(&subpackets[0]) == eval_packet(&subpackets[1]) {
+                1
+            } else {
+                0
+            }
+        }
+        _ => panic!()
+    }
 }
 
 fn parse_packet(bits: &[usize]) -> (Packet, usize) {
@@ -210,8 +258,8 @@ mod tests_day16 {
 
     #[test]
     fn test_part2() {
-        let input = "";
+        let input = "9C0141080250320F1802104A08";
         let result = part2(input);
-        assert_eq!(result, 315);
+        assert_eq!(result, 1);
     }
 }

@@ -150,7 +150,7 @@ mod test_solutions {
         let part2 = day14::part2(&contents);
 
         assert_eq!(part1, 2587);
-        assert_eq!(part2, 3318837563123); 
+        assert_eq!(part2, 3318837563123);
     }
 
     #[test]
@@ -160,6 +160,16 @@ mod test_solutions {
         let part2 = day15::part2(&contents);
 
         assert_eq!(part1, 487);
-        assert_eq!(part2, 2821); 
+        assert_eq!(part2, 2821);
+    }
+
+    #[test]
+    fn test_day16() {
+        let contents = fs::read_to_string("inputs/day16.txt").unwrap();
+        let part1 = day16::part1(&contents);
+        let part2 = day16::part2(&contents);
+
+        assert_eq!(part1, 1014);
+        assert_eq!(part2, 1922490999789);
     }
 }
