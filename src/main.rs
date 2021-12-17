@@ -2,9 +2,9 @@ use aoc2021::*;
 use std::fs;
 
 fn main() {
-    let contents = fs::read_to_string("inputs/day16.txt").unwrap();
-    let part1 = day16::part1(&contents);
-    let part2 = day16::part2(&contents);
+    let contents = fs::read_to_string("inputs/day17.txt").unwrap();
+    let part1 = day17::part1(&contents);
+    let part2 = day17::part2(&contents);
     println!("Part 1: {0}\nPart 2: {1}", part1, part2);
 }
 
@@ -171,5 +171,16 @@ mod test_solutions {
 
         assert_eq!(part1, 1014);
         assert_eq!(part2, 1922490999789);
+    }
+
+    // Add parsing for original input?
+    #[test]
+    fn test_day17() {
+        let contents = fs::read_to_string("inputs/day17.txt").unwrap();
+        let part1 = day17::part1(&contents);
+        let part2 = day17::part2(&contents);
+
+        assert_eq!(part1, 8911);
+        assert_eq!(part2, 4748);
     }
 }
